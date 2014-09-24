@@ -1,0 +1,506 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/jquery-ui.min.js" ></script>
+		<script type="text/javascript" src="js/jquery.deserialize.js"></script>
+		<script type="text/javascript" src="js/jquery.tmpl.min.js"></script>
+		<script type="text/javascript" src="js/form2object.js" charset="utf-8"></script>
+		<script type="text/javascript" src="js/jquery.toObject.js" charset="utf-8"></script>
+		<script type="text/javascript" src="js/json2.js" charset="utf-8"></script>
+		<script type="text/javascript" src="js/date.format.js" charset="utf-8"></script>
+		<script type="text/javascript" src="js/prescription.js" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="js/jquery-ui.css" /> 
+		<link rel="stylesheet" type="text/css" href="css/style.css" /> 
+	</head>
+	<body>
+		<h1>Service de Chirurgie Pédiatrique</h1>
+		<div id="patients_container" style="float:right; width:400px;">
+			<a href="" id="init">Nouvelle prescription</a>
+			<br />
+			Prescriptions sauvegardées
+		<ul id="patients">	
+		</ul>
+		<div class="help">
+			<h3>AIDE ANALGESIE IV IR</h3>
+			<div>
+			<ul>
+			<li>PERFALGAN IVL 15 mn  15mg/kg/6h</li>
+			<li>NUBAIN IVL 20 mn  0,2mg/kg/6h</li>
+			<li>PCA Morphine   cf protocole</li>
+			</ul>
+			</div>
+			<h3>AIDE ANALGESIE et ANTYPYRETIQUES per os</h3>
+			<div>
+			<ul>
+			<li>CODENFAN 1mg/kg/6h</li>
+			<li>KALINOX lors soins douloureux</li>
+			<li>DOLIPRANE  dose poids ttes les 6 h soit 60mg/kg/j</li>
+			<li>HYPNOVEL IR   0,2mg à 0,5mg/kg</li>
+			<li>ADVIL  dose poids ttes les 6 h soit 30mg/kg/j</li>
+			</ul>
+			</div>
+			<h3>AIDE AUTRES TRAITEMENTS</h3>
+			<div>
+			<ul>
+			<li>DITROPAN  1/2 cp  4 fois par jour</li>
+			<li>ZOPHREN IVL 5mn 0,1 mg/Kg/j  max 4mg/j</li>
+			<li>PRIMPERAN 0,5 mg/kg/j en 4 prises </li>
+			<li>MOTILIUM dose poids 4 fois par jour </li> 
+			<li>INEXIUM 10 mg  1mg/k/j </li>
+			<li>MOPRAL  1mg/k/j </li>
+			<li>UVESTEROL dose N°1 par jour</li>
+			<li>VITAMINE K1  1 ampoule/semaine si allaitement exclusif</li>
+			<li>LOVENOX  0,2 ml/j SC</li>
+			<li>Oxygène lunettes QSP sat> 95%</li>
+			<li>CHOLESTASES : Vitamine A  50000 U IM tous les mois(amp 2 ml =100000U)     Vitamine D  5mg = 200000U IM / 3 mois(amp 1,5 ml = 600000U) Vitamine E  10 mg/kg  IM/ 15j sans dépasser 200 mg (amp 2 ml =100 mg) Vitamine K 10 mg IVDL /15 jours (amp 1 ml = 10 mg )</li>
+			</ul>
+			</div>
+			<h3>AIDE ANTIBIOTIQUES</h3>
+			<div>
+			<ul>
+				<li>AUGMENTIN PO : dose poids 3 fois par jour </li>
+				<li>BACTRIM PO préventif 0,25ml/kg 1 fois/j </li>
+				<li>CLAMOXYL PO : 50 à 100mg/kg/j  </li>
+				<li>ORACILLINE PO : 50 à 100000 U/kg/j </li>
+				<li>OROKEN PO: dose poids 2 fois par jour </li>
+				<li>AUGMENTIN IVL 100 mg/kg/j en 3 fois </li>
+				<li>CLAFORAN IVL  100 mg/kg/j en 3 fois </li>
+				<li>CLAMOXYL IVL   100 mg/kg/j en 3 fois </li>
+				<li>GENTA IV 3mg/kg/j en perf de 30' </li>
+				<li>PENICILLINE IVL 100000U/kg/j en 3 fois</li> 
+				<li>ROCEPHINE IVL  50 mg/kg  1 fois par jour</li>
+				<li>TAZOCILLINE IV 240à320mg/kg/j en 3 perf de 30'</li>
+				<li>AMIKLIN 15 mg/kg/j  1fois par jour</li>
+				<li>TIENAM 60à100 mg/kg/j en 4 perfusion de 30'</li>
+			</ul>
+			</div>
+		</div>
+		
+		
+		</div>
+		
+		
+		<form method="get" id="medication_form" style="float:left;width:600px">
+			<fieldset>
+				<div><label for="medication.medication_date">Date</label><input placeholder="Date" type="date" name="medication.medication_date" id="medication.medication_date" /></div>
+				<div><label for="medication.lastname">Nom</label><input placeholder="Nom" type="text" id="medication.lastname" name="medication.lastname" /></div>
+				<div><label for="medication.firstname">Prénom</label><input placeholder="Prénom" type="text" id="medication.firstname" name="medication.firstname" /></div>
+				<div><label for="medication.firstname">Date de naissance</label><input placeholder="Date de naissance" type="date" id="medication.birthdate" name="medication.birthdate" /></div>
+				<div><label for="medication.age">Age</label><input placeholder="Age" readonly="readonly" type="text" id="medication.age" name="medication.age" /></div>
+			</fieldset>
+			<fieldset>
+				<div>
+					<label for="medication.intervention_date">Date d'intervention</label><input placeholder="Date d'intervention" type="date" id="medication.intervention_date" name="medication.intervention_date" />
+				</div>
+				<div>
+					<label for="medication.intervention_datejplus">Intervention J+</label><input placeholder="Intervention J+" type="date" id="medication.intervention_datejplus" readonly="readonly" name="medication.intervention_datejplus" />
+				</div>
+				<div>
+					<label for="medication.intervention">Intervention</label>
+					<input placeholder="Intervention"  type="text" id="medication.intervention" name="medication.intervention" />
+				</div>
+			</fieldset>
+			<fieldset>
+				<div>
+				<label for="medication.prescriptor_senior">Préscripteur sénior</label>
+				<select type="text" id="medication.prescriptor_senior" name="medication.prescriptor_senior" >
+					<option value="----">----</option>
+					<option value="Pr MARTELLI">Pr MARTELLI</option>
+					<option value="Dr BRANCHEREAU">Dr BRANCHEREAU</option>
+					<option value="Dr DERGUINI">Dr DERGUINI</option>
+					<option value="Dr DE DREUZY">Dr DE DREUZY</option>
+					<option value="Dr FOUQUET">Dr FOUQUET</option>
+					<option value="Pr GAUTHIER">Pr GAUTHIER</option>
+					<option value="Dr GOLDSZMIDT">Dr GOLDSZMIDT</option>
+					<option value="Dr HAUTEFORT">Dr HAUTEFORT</option>
+					<option value="Dr MONTUPET">Dr MONTUPET</option>
+					<option value="Dr GUERIN">Dr GUERIN</option>
+					<option value="Dr DE LAMBERT">Dr DE LAMBERT</option>
+					<option value="Dr BOUBNOVA">Dr BOUBNOVA</option>
+				</select>
+				</div>
+				<div>
+				<label for="medication.prescriptor_intern">Préscripteur interne</label>
+				<select type="text" id="medication.prescriptor_intern" name="medication.prescriptor_intern" >
+					<option value="----">----</option>
+					<option value="KOHAUT">KOHAUT</option>
+					<option value="TABONE">TABONE</option>
+					<option value="KHESRANI">KHESRANI</option>
+					
+					<option value="MONTARULI">MONTARULI</option>
+									</select>
+				</div>
+			</fieldset>
+			<fieldset>
+				<div><label for="medication.birth_weight">Poids de naissance (kg)</label><input type="text" name="medication.birth_weight" id="medication.birth_weight" /></div>
+				<div><label for="medication.today_weight">Poids du jour (kg)</label><input type="text" name="medication.today_weight" id="medication.today_weight" /></div>
+				<div><label for="medication.weight_difference" >Croissance (kg)</label><input type="text" name="medication.weight_difference" id="medication.weight_difference" readonly="readonly"/></div>
+			</fieldset>
+				<ul id="posologie">
+					<fieldset>
+					<li>
+						<span class="poso">Surveillance</span>
+						<div class="default">
+							<select name="medication.surveillance[0].type" id="medication.surveillance[0].type">
+								<option value="0">---</option>
+								<option value="Pouls,FR,SaO2,T,PA/4h">
+									Pouls, FR, SaO2,T°, PA  /4h
+								</option>
+								<option value="Pouls,FR,SaO2,T,PA/8h">
+									Pouls, FR, SaO2,T°, PA  /8h
+								</option>
+								<option value="OPS ou EVA/ 8h">OPS ou EVA/ 8h</option>
+								<option value="Dextro /12h">Dextro /12h</option>
+								<option value="Hemocue /12h">Hemocue /12h</option>
+								<option value="SG / 8 h  et/ou Drain / 8h">SG / 8 h  et/ou Drain / 8h</option>
+								<option value="Diurèse / 24 h">Diurèse / 24 h</option>
+								<option value="Poids 1x/j">Poids 1x/j</option>
+								<option value="Ingestas 1x/j">Ingestas 1x/j</option>
+								<option value="Scope">Scope</option>
+								<option value="Kasai : si T°>38,5 ou< 36 faire nfs, crp, pct, hémoc,bhc,ecbu et Tel IDG 14651">Kasai : si T°>38,5 ou< 36 faire nfs, crp, pct, hémoc,bhc,ecbu et Tel IDG 14651</option>
+								<option value="other">Autre</option>
+							</select> 
+							<div class="precise">
+								<label for="medication.surveillance[0].other">Préciser</label> <input type="text" name="medication.surveillance[0].other" id="medication.surveillance[0].other"/>
+							</div>
+							<span class="help"></span>
+							
+						</div>
+					</li>
+					</fieldset>
+					<fieldset>
+					<li>
+						<span class="poso">Alimentation</span>
+						<div class="default">
+							<div>
+							<select name="medication.alimentation[0].type" id="medication.alimentation[0].type">
+								<option value="0">---</option>
+								<option value="Boisson">Boisson</option>
+								<option value="Normale">Normale</option>
+								<option value="BYC">BYC</option>
+								<option value="A jeun">à jeun</option>
+								<option value="Diététique">Diététique</option>
+								<option value="Lait 1er âge">Lait 1er âge</option>
+								<option value="Peptijunior">Peptijunior</option>
+								<option value="Allaitement maternel">Allaitement maternel</option>
+								<option value="NEDC">NEDC</option>
+								<option value="Enrichissement Maltodextridine">Enrichissement Maltodextridine </option>
+								<option value="Enrichissement DM">Enrichissement DM</option>
+								<option value="other">Autre</option>
+							</select> 
+							<div class="precise">
+								<label for="medication.alimentation[0].other">Préciser</label> <input type="text" name="medication.alimentation[0].other" id="medication.alimentation[0].other"/>
+							</div>
+							<span class="help"></span>
+							</div>
+							<div>
+							<label for="medication.alimentation[0].posologie">Posologie</label><input type="text" name="medication.alimentation[0].posologie" id="medication.alimentation[0].posologie" />
+							</div>
+							
+						</div>
+					</li>
+					</fieldset>
+					<fieldset>
+					<li>
+						<span class="poso">Drains et sondes</span>
+						<div class="default">
+							<div>
+							<select name="medication.drains[0].type" id="medication.drains[0].type">
+								<option value="0">---</option>
+								<option value="Sonde nasogastrique au sac">Sonde nasogastrique au sac</option>
+								<option value="Sonde nasogastrique déclive">Sonde nasogastrique déclive</option>
+								<option value="Sonde nasogastrique aspiration -20 cmH2O">Sonde nasogastrique aspiration -20 cmH2O</option>
+								<option value="Ablation sonde nasogastrique">Ablation sonde nasogastrique</option>
+								<option value="Mobilisation lame/drain">Mobilisation lame/drain</option>
+								<option value="Ablation lame/drain">Ablation lame/drain</option>
+								<option value="Ablation sonde urinaire">Ablation sonde urinaire</option>
+								<option value="other">Autre</option>
+							</select> 
+							<div class="precise">
+								<label for="medication.drains[0].other">Préciser</label> <input type="text" name="medication.drains[0].other" id="medication.drains[0].other"/>
+							</div>
+							<span class="help"></span>
+							</div>
+							
+						</div>
+					</li>
+					</fieldset>
+					<fieldset>
+					<li>
+						<span class="poso">Perfusion de base</span>
+						<div class="default">
+							<div>
+							<select name="medication.perfusion[0].type" id="medication.perfusion[0].type">
+								<option value="0">---</option>
+								<option value="B 46 en ml/h">B 46 en ml/h</option>
+								<option value="Parentérale (cf protocole )">Parentérale (cf protocole )</option>
+								<option value="other">Autre</option>
+							</select>
+							<div class="precise">
+								<label for="medication.perfusion[0].other">Préciser</label> <input type="text" name="medication.perfusion[0].other" id="medication.perfusion[0].other"/>
+							</div>
+							<span class="help"></span>
+							</div>
+							<div>
+							<label for="medication.perfusion[0].posologie">Posologie</label><input type="text" name="medication.perfusion[0].posologie" id="medication.perfusion[0].posologie" />
+							</div>
+							
+						</div>
+					</li>
+					</fieldset>
+					<fieldset>
+					<li>
+						<span class="poso">Compensations pertes digestives</span>
+						<div class="default">
+							<div>
+							<select name="medication.compensation[0].type" name="medication.compensation[0].type">
+								<option value="0">---</option>
+								<option value="SG vol/vol ttes les 4 h par Ringer Lactate">SG vol/vol ttes les 4 h par Ringer Lactate</option>
+								<option value="Drain biliaire vol/vol ttes les 4 h par eau de Vichy">Drain biliaire vol/vol ttes les 4 h par Eau de Vichy</option>
+								<option value="other">Autre</option>
+							</select> 
+							<div class="precise">
+								<label for="medication.compensation[0].other">Préciser</label> <input type="text" name="medication.compensation[0].other" id="medication.compensation[0].other"/>
+							</div>
+							<span class="help"></span>
+							</div>
+							
+						</div>
+					</li>
+					</fieldset>
+					<fieldset>
+					<li>
+						<span class="poso">Analgésie IV IR</span>
+						<div class="default">
+							<div>
+							<select name="medication.analgesies[0].type" id="medication.analgesies[0].type">
+								<option value="0">---</option>
+								<option value="PERFALGAN" >PERFALGAN</option>
+								<option value="NUBAIN" >NUBAIN</option>
+								<option value="PCA Morphine" >PCA Morphine</option>
+								<option value="HYPNOVEL IR" >HYPNOVEL IR </option>
+								<option value="other" >Autre</option>
+							</select>	
+							<div class="precise">
+								<label for="medication.analgesies[0].other">Préciser</label> <input type="text" name="medication.analgesies[0].other" id="medication.analgesies[0].other"/>
+							</div>
+							<span class="help"></span>
+							</div>
+							<div>
+							<label for="medication.analgesies[0].posologie">Posologie</label><input type="text" name="medication.analgesies[0].posologie" id="medication.analgesies[0].posologie" />
+							</div>
+							
+						</div>
+					</li>
+					</fieldset>
+					<fieldset>
+					<li>
+						<span class="poso">Analgésie et Antipyretiques per os</span>
+						<div class="default">
+							<div>
+							<select name="medication.analgesies_per_os[0].type" id="medication.analgesies_per_os[0].type">
+								<option value="0">---</option>
+								<option value="Si EVA ≥ 3 ou EVENDOL ≥ 4 donner DOLIPRANE" >Si EVA ≥ 3 ou EVENDOL ≥ 4 donner DOLIPRANE</option>
+								<option value="CODENFAN" data-comment="1mg/kg/6h">CODENFAN</option>
+								<option value="KALINOX" data-comment="lors soins douloureux">KALINOX</option>
+								<option value="SPASFON">SPASFON</option>
+								<option value="other">Autre</option>
+							</select> 
+							<div class="precise">
+								<label for="medication.analgesies_per_os[0].other">Préciser</label> <input type="text" name="medication.analgesies_per_os[0].other" id="medication.analgesies_per_os[0].other"/>
+							</div>
+							<span class="help"></span>
+							</div>
+							<div>
+								<label for="medication.analgesies_per_os[0].posologie">Posologie</label><input type="text" name="medication.analgesies_per_os[0].posologie" id="medication.analgesies_per_os[0].posologie" />
+							</div>
+							
+						</div>
+					</li>
+					</fieldset>
+					<fieldset>
+					<li>
+						<span class="poso">Antibiotiques</span>
+						<div class="default">
+							<div>
+							<select name="medication.antibiotiques[0].type" id="medication.antibiotiques[0].type">
+								<option value="0">---</option>
+								<option value="AUGMENTIN PO" >AUGMENTIN PO</option>
+								<option value="BACTRIM PO" >BACTRIM PO</option>
+								<option value="CLAMOXYL PO" >CLAMOXYL PO</option>
+								<option value="ORACILLINE PO" >ORACILLINE PO</option>
+								<option value="OROKEN PO" >OROKEN PO</option>
+								<option value="AUGMENTIN IV">AUGMENTIN IV</option>
+								<option value="CLAFORAN IV">CLAFORAN IV</option>
+								<option value="CLAMOXYL IV">CLAMOXYL IV</option>
+								<option value="GENTA IV">GENTA IV</option>
+								<option value="PENICILLINE IV">PENICILLINE IV</option>
+								<option value="ROCEPHINE IV">ROCEPHINE IV</option>
+								<option value="TAZOCILLINE IV">TAZOCILLINE IV</option>
+								<option value="TIENAM IV">TIENAM IV</option>
+								<option value="other">Autre</option>
+							</select> 
+							<div class="precise">
+								<label for="medication.antibiotiques[0].other">Préciser</label> <input type="text" name="medication.antibiotiques[0].other" id="medication.antibiotiques[0].other"/>
+							</div>
+							<span class="help"></span>
+							</div>
+							<div>
+							<label for="medication.antibiotiques[0].posologie">Posologie</label><input type="text" name="medication.antibiotiques[0].posologie" id="medication.antibiotiques[0].posologie" />
+							</div>
+							
+						</div>
+					</li>
+					</fieldset>
+					<fieldset>
+					<li>
+						<span class="poso">Autres traitements</span>
+						<div class="default">
+							<div>
+							<select name="medication.autres[0].type" id="medication.autres[0].type">
+								<option value="0">---</option>
+								<option value="DITROPAN" >DITROPAN</option>
+								<option value="ZOPHREN" >ZOPHREN</option>
+								<option value="MOTILIUM">MOTILIUM </option>
+								<option value="MOPRAL" >MOPRAL</option>
+								<option value="INEXIUM" >INEXIUM </option>
+								<option value="UVESTEROL">UVESTEROL </option>
+								<option value="VITAMINE K1">VITAMINE K1 </option>
+								<option value="LOVENOX">LOVENOX</option>
+								<option value="OXYGENE lunettes">OXYGENE lunettes</option>
+								<option value="RIFAMYCINE collyre">RIFAMYCINE collyre</option>
+								<option value="other">Autre</option>
+							</select> 
+							<div class="precise">
+								<label for="medication.autres[0].other">Préciser</label> <input type="text" id="medication.autres[0].other" name="medication.autres[0].other"/>
+							</div>
+							<span class="help"></span>
+							</div>
+							<div>
+							<label for="medication.autres[0].posologie">Posologie</label><input type="text" id="medication.autres[0].posologie" name="medication.autres[0].posologie" />
+							</div>
+							
+						</div>
+					</li>
+					</fieldset>
+					<fieldset>
+					<li>
+						<span class="poso">Mesures associées</span>
+						<div class="default">
+							<div>
+							<select name="medication.mesures[0].type" id="medication.mesures[0].type">
+								<option value="0">---</option>
+								<option value="Isolement">Isolement</option>
+								<option value="Pansements : irrigation…..">Pansements : irrigation…..</option>
+								<option value="Décubitus strict">Décubitus strict</option>
+								<option value="Mobilisation">Mobilisation</option>
+								<option value="Fauteuil">Fauteuil</option>
+								<option value="Promenade dans le service">Promenade dans le service</option>
+								<option value="Maison de l'enfant">Maison de l'enfant</option>
+								<option value="Kine respiratoire">Kine respiratoire</option>
+								<option value="Psychomotricienne">Psychomotricienne</option>
+								<option value="other">Autre</option>
+							</select> 
+							<div class="precise">
+								<label for="medication.mesures[0].other">Préciser</label> <input type="text" name="medication.mesures[0].other" id="medication.mesures[0].other"/>
+							</div>
+							<span class="help"></span>
+							</div>
+							
+						</div>
+					</li>
+					</fieldset>
+					<fieldset>
+						<span class="">A prévoir</span>
+						<textarea name="medication.more" cols="70" rows="5"></textarea>
+					</fieldset>
+				</ul>
+				<div>
+				<a href="" id="save" class="button">Sauvegarder</a>
+				<a href="" id="print" class="button">Imprimer</a>
+				</div>
+		</form>
+
+      <script id="ordonance_general" type="text/x-jquery-tmpl">  
+			<h1 style="text-align:center;border:1px solid black; font-variant:small-caps">Service de chirurgie pédiatrique</h2>
+            <h2 style="text-align:center">${lastname} ${firstname} - ${age}</h2>
+			<p>
+				Date de prescription : ${medication_date} <br />
+				Préscripteur sénior : ${prescriptor_senior}</br>
+				Interne : ${prescriptor_intern}
+			</p>
+			<table style="width:100%; border:1px solid black">
+				<tr style="border:1px solid black"><td>Intervention : ${intervention}</td><td>date d'intervention : ${intervention_date}</td><td>J+ : ${intervention_datejplus}</td></tr>
+			</table>
+			<table style="width:100%; border:1px solid black">
+				<tr style="border:1px solid black"><td>Poids de naissance : ${birth_weight} kg</td><td>Poids du jour : ${today_weight} kg</td><td>Croissance : ${weight_difference} kg</td></tr>
+			</table>
+			
+			<table style="width:100%; border:1px solid black">
+				<tr style="border:1px solid black">
+					<td>IDE Matin:</td>
+					<td>IDE Après-midi:</td>
+					<td>IDE Nuit:</td>
+				</tr>
+				<tr style="border:1px solid black">
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</table>
+			
+			<h3>Surveillance</h3>
+				<ul>
+				{{tmpl(surveillance) "#detail_tmpl2"}} 
+			</ul>
+			<h3>Alimentation</h3>
+			<ul>
+			{{tmpl(alimentation) "#detail_tmpl"}} 
+			</ul>
+			<h3>Drains et sondes</h3>
+			<ul>
+			{{tmpl(drains) "#detail_tmpl2"}} 
+			</ul>
+			<h3>Perfusion de base</h3>
+			<ul>
+			{{tmpl(perfusion) "#detail_tmpl"}} 
+			</ul>
+			<h3>Compensations pertes digestives</h3>
+			<ul>
+			{{tmpl(compensation) "#detail_tmpl2"}} 
+			</ul>
+			<h3>Analgésie IV </h3>
+			<ul>
+			{{tmpl(analgesies) "#detail_tmpl"}} 
+			</ul>
+			<h3>Analgésie et Antypyretiques per os</h3>
+			<ul>
+			{{tmpl(analgesies_per_os) "#detail_tmpl"}} 
+			</ul>
+			<h3>Antibiotiques</h3>
+			<ul>
+			{{tmpl(antibiotiques) "#detail_tmpl"}} 
+			</ul>
+			<h3>Autres traitements</h3>
+			<ul>
+			{{tmpl(autres) "#detail_tmpl"}} 
+			</ul>
+			<h3>Mesures associées</h3>
+			<ul>
+			{{tmpl(mesures) "#detail_tmpl2"}} 
+			</ul>
+			{{if more}}A prévoir : {{html more}}{{/if}}
+      </script>
+	<script id="detail_tmpl" type="text/x-jquery-tmpl">
+		<li><b>{{if other}}${other}{{else}}{{if type}}{{html type}}{{/if}}{{/if}} : {{if posologie}}${posologie}{{/if}} </b><br /> <span style="padding-left:50px">Horaire</span> : <br />&nbsp;</li>
+	</script>
+	<script id="detail_tmpl2" type="text/x-jquery-tmpl">
+		<li><b>{{if other}}${other}{{else}}{{if type}}{{html type}}{{/if}} {{/if}}</b><br /> <span style="padding-left:50px">Horaire</span> : <br />&nbsp;</li>
+	</script>
+		<div id="ordonance" style="display:none;">
+
+		</div>
+		
+	</body>
+</html>
