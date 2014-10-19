@@ -1,0 +1,230 @@
+<div class="row">
+  <div class="col-xs-6">
+    <form role="form">
+      <div>
+        <button class="btn btn-default" ng-click="ctrl.create()">Nouvelle prescription</button>
+        <button class="btn btn-default" ng-click="ctrl.save()">Sauvegarder</button>
+        <button class="btn btn-default" ng-click="ctrl.print()">Imprimer</button>
+        <fieldset>
+          <legend>Informations générales</legend>
+
+          <div class="form-group">
+            <label for="date">Date</label>
+            <input class="form-control" ng-model="ctrl.date" placeholder="Date" type="date"/>
+            </div>
+
+          <div class="form-group">
+            <label for="lastname">Nom</label>
+            <input class="form-control" ng-model="ctrl.prescription.lastname" placeholder="Nom" type="text" name="lastname"/>
+          </div>
+
+          <div class="form-group">
+            <label for="firstname">Prénom</label>
+            <input class="form-control" ng-model="ctrl.prescription.firstname" placeholder="Prénom" type="text" name="firstname"/>
+          </div>
+
+          <div class="form-group">
+            <label for="birthdate">Date de naissance</label>
+            <input class="form-control" ng-model="ctrl.prescription.birthdate" placeholder="Date de naissance" type="date" id="medication.birthdate" name="birthdate" />
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Date</legend>
+          <div class="form-group">
+            <label for="intervention-date">Date d'intervention</label>
+            <input class="form-control" ng-model="ctrl.prescription.interventionDate" placeholder="Date" type="date" name="intervention-date"/>
+          </div>
+
+          <div class="form-group">
+            <label for="intervention">Intervention</label>
+            <input class="form-control" ng-model="ctrl.prescription.intervention" placeholder="Intervention" type="text" name="intervention"/>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Préscripteurs</legend>
+          <div class="form-group">
+            <label for="prescriptor-senior">Préscripteur senior</label>
+            <select class="form-control" ng-model="ctrl.prescription.prescriptorSenior"
+            ng-options="c.id as c.label for c in ctrl.prescriptorSeniors" name="prescriptor-senior"> </select>
+          </div>
+
+          <div class="form-group">
+            <label for="prescriptor-intern">Préscripteur interne</label>
+            <select class="form-control" ng-model="ctrl.prescription.prescriptorIntern"
+            ng-options="c.id as c.label for c in ctrl.prescriptorInterns" name="prescriptor-intern"> </select>
+          </div>
+
+        </fieldset>
+        <fieldset>
+          <legend>Poids</legend>
+          <div class="form-group">
+            <label for="birth-weight">Poids de naissance</label>
+            <input class="form-control" ng-model="ctrl.prescription.birthWeight" placeholder="Poids" type="text" name="birth-weight"/>
+          </div>
+
+          <div class="form-group">
+            <label for="current-weight">Poids du jour</label>
+            <input class="form-control"  ng-model="ctrl.prescription.currentWeight" placeholder="Poids" type="text" name="current-weight"/>
+          </div>
+
+        </fieldset>
+
+        <fieldset>
+          <legend>Surveillance</legend>
+          <div ng-init="setOptions('supervisions');" ng-controller="SelectCtrl as surv" ng-include="'select.html'"></div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Alimentation</legend>
+          <div ng-init="setOptions('alimentations', true);" ng-controller="SelectCtrl as surv" ng-include="'select.html'"></div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Drains et sondes</legend>
+          <div ng-init="setOptions('drains');" ng-controller="SelectCtrl as surv" ng-include="'select.html'"></div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Perfusion de base</legend>
+          <div ng-init="setOptions('perfusions', true);" ng-controller="SelectCtrl as surv" ng-include="'select.html'"></div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Compensations pertes digestives</legend>
+          <div ng-init="setOptions('compensations');" ng-controller="SelectCtrl as surv" ng-include="'select.html'"></div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Analgésie IV IR</legend>
+          <div ng-init="setOptions('analgesies4IR', true);" ng-controller="SelectCtrl as surv" ng-include="'select.html'"></div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Analgésie et Antipyretiques per os</legend>
+          <div ng-init="setOptions('analgesies', true);" ng-controller="SelectCtrl as surv" ng-include="'select.html'"></div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Antibiotiques</legend>
+          <div ng-init="setOptions('antibiotics', true);" ng-controller="SelectCtrl as surv" ng-include="'select.html'"></div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Autres traitements</legend>
+          <div ng-init="setOptions('others', true);" ng-controller="SelectCtrl as surv" ng-include="'select.html'"></div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Mesures associées</legend>
+          <div ng-init="setOptions('measures');" ng-controller="SelectCtrl as surv" ng-include="'select.html'"></div>
+        </fieldset>
+
+        <fieldset>
+          <div class="form-group">
+            <label for="todo">A prévoir</label>
+            <textarea class="form-control" ng-model="ctrl.prescription.todo" placeholder="A prévoir" name="todo"></textarea>
+          </div>
+        </fieldset>
+
+      </div>
+    </form>
+  </div>
+  <div class="col-xs-6">
+    <div class="panel-group" id="accordion">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a onclick="return false;" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne">
+              AIDE ANALGESIE IV IR
+            </a>
+          </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in">
+          <div class="panel-body">
+            <ul>
+              <li>PERFALGAN IVL 15 mn  15mg/kg/6h</li>
+              <li>NUBAIN IVL 20 mn  0,2mg/kg/6h</li>
+              <li>PCA Morphine   cf protocole</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a onclick="return false;" data-toggle="collapse" data-parent="#accordion" data-target="#collapseTwo">
+              AIDE ANALGESIE et ANTYPYRETIQUES per os
+            </a>
+          </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse">
+          <div class="panel-body">
+           <ul>
+            <li>CODENFAN 1mg/kg/6h</li>
+            <li>KALINOX lors soins douloureux</li>
+            <li>DOLIPRANE  dose poids ttes les 6 h soit 60mg/kg/j</li>
+            <li>HYPNOVEL IR   0,2mg à 0,5mg/kg</li>
+            <li>ADVIL  dose poids ttes les 6 h soit 30mg/kg/j</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a onclick="return false;" data-toggle="collapse" data-parent="#accordion" data-target="#collapseThree">
+            AIDE AUTRES TRAITEMENTS
+          </a>
+        </h4>
+      </div>
+      <div id="collapseThree" class="panel-collapse collapse">
+        <div class="panel-body">
+          <ul>
+            <li>DITROPAN  1/2 cp  4 fois par jour</li>
+            <li>ZOPHREN IVL 5mn 0,1 mg/Kg/j  max 4mg/j</li>
+            <li>PRIMPERAN 0,5 mg/kg/j en 4 prises </li>
+            <li>MOTILIUM dose poids 4 fois par jour </li>
+            <li>INEXIUM 10 mg  1mg/k/j </li>
+            <li>MOPRAL  1mg/k/j </li>
+            <li>UVESTEROL dose N°1 par jour</li>
+            <li>VITAMINE K1  1 ampoule/semaine si allaitement exclusif</li>
+            <li>LOVENOX  0,2 ml/j SC</li>
+            <li>Oxygène lunettes QSP sat> 95%</li>
+            <li>CHOLESTASES : Vitamine A  50000 U IM tous les mois(amp 2 ml =100000U)     Vitamine D  5mg = 200000U IM / 3 mois(amp 1,5 ml = 600000U) Vitamine E  10 mg/kg  IM/ 15j sans dépasser 200 mg (amp 2 ml =100 mg) Vitamine K 10 mg IVDL /15 jours (amp 1 ml = 10 mg )</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <a onclick="return false;" data-toggle="collapse" data-parent="#accordion" data-target="#collapseFour">
+            AIDE ANTIBIOTIQUES
+          </a>
+        </h4>
+      </div>
+      <div id="collapseFour" class="panel-collapse collapse">
+        <div class="panel-body">
+          <ul>
+            <li>AUGMENTIN PO : dose poids 3 fois par jour </li>
+            <li>BACTRIM PO préventif 0,25ml/kg 1 fois/j </li>
+            <li>CLAMOXYL PO : 50 à 100mg/kg/j  </li>
+            <li>ORACILLINE PO : 50 à 100000 U/kg/j </li>
+            <li>OROKEN PO: dose poids 2 fois par jour </li>
+            <li>AUGMENTIN IVL 100 mg/kg/j en 3 fois </li>
+            <li>CLAFORAN IVL  100 mg/kg/j en 3 fois </li>
+            <li>CLAMOXYL IVL   100 mg/kg/j en 3 fois </li>
+            <li>GENTA IV 3mg/kg/j en perf de 30' </li>
+            <li>PENICILLINE IVL 100000U/kg/j en 3 fois</li>
+            <li>ROCEPHINE IVL  50 mg/kg  1 fois par jour</li>
+            <li>TAZOCILLINE IV 240à320mg/kg/j en 3 perf de 30'</li>
+            <li>AMIKLIN 15 mg/kg/j  1fois par jour</li>
+            <li>TIENAM 60à100 mg/kg/j en 4 perfusion de 30'</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

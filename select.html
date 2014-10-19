@@ -1,0 +1,7 @@
+<div ng-repeat="item in surv.selected">
+  <select class="form-control" ng-model="item" ng-options="c.label for c in surv.options track by c.id" ng-change="surv.update(item, $index)"> </select>
+  <input ng-model="item.otherOption" type="text" ng-show="isOther(item.id)" ng-change="surv.updateOther(item, $index)" placeholder="Préciser"/>
+  <input ng-model="item.posology" type="text" ng-show="surv.hasPosology" ng-change="surv.updatePosology(item, $index)" placeholder="Posologie"/>
+  <a ng-click="surv.remove(item, $index)">Supprimer</a>
+</div>
+<button class="btn btn-default" ng-click="surv.add()">Ajouter</button>

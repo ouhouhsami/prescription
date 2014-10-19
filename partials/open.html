@@ -1,0 +1,7 @@
+<ul class="list-group">
+    <li ng-repeat="item in ctrl.prescriptions" class="list-group-item">
+      {{ item.date }} {{ item.lastname }} {{ item.firstname }}
+      <a href="#/edit/{{ item.uuid }}">Modifier</a>
+      <a ng-click="ctrl.remove(item.uuid, $index)">Supprimer</a>
+  </li>
+</lu>
