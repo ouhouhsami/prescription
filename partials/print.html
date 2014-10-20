@@ -1,5 +1,14 @@
 <div>
   <h2>
     {{ ctrl.prescription.firstname }} {{ ctrl.prescription.lastname }} - {{ ctrl.prescription.age }}
-  </h2>
+</h2>
+    {{ ctrl.prescription.todo }}
+
+    <ul>
+        <li>Préscripteur sénior : {{ ctrl.prescriptorSenior.label }}</li>
+        <retrieve-object-from-key-value key="id" value="{{ ctrl.prescription.prescriptorSenior }}" array="{{ ctrl.prescriptorSeniors }}">
+            {{ name }}
+        </retrieve-object-from-key-value>
+        </ul>
+
 </div>
