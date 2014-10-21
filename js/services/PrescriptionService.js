@@ -148,6 +148,22 @@ angular
         },
         getOptions: function(param) {
           return eval(param); // ugly ugly
+        },
+        getLists: function(){
+          return {
+            supervisions: supervisions,
+            alimentations: alimentations,
+            drains: drains,
+            perfusions: perfusions,
+            compensations: compensations,
+            analgesies4IR: analgesies4IR,
+            analgesies: analgesies,
+            antibiotics: antibiotics,
+            others: others,
+            measures: measures,
+            prescriptorSeniors: prescriptorSeniors,
+            prescriptorInterns: prescriptorInterns
+          };
         }
       };
     }

@@ -12,6 +12,7 @@ angular.module('prescriptionApp')
     self.prescriptorInterns = PrescriptionService.getOptions('prescriptorInterns');
 
     self.save = function() {
+      console.log(self.prescription.date)
       PrescriptionService.savePrescription();
     };
 

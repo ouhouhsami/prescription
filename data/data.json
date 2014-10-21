@@ -201,7 +201,7 @@
     {
       "id": 8,
       "label": "other",
-      "other": true
+      "isOther": true
     }
   ],
   "perfusions": [
@@ -216,7 +216,7 @@
     {
       "id": 3,
       "label": "other",
-      "other": true
+      "isOther": true
     }
   ],
   "compensations": [
@@ -231,7 +231,7 @@
     {
       "id": 3,
       "label": "other",
-      "other": true
+      "isOther": true
     }
   ],
   "analgesies4IR": [
@@ -254,7 +254,7 @@
     {
       "id": 5,
       "label": "Autre",
-      "other": true
+      "isOther": true
     }
   ],
   "analgesies": [
@@ -277,7 +277,7 @@
     {
       "id": 5,
       "label": "Autre",
-      "other": true
+      "isOther": true
     }
   ],
   "antibiotics": [
@@ -336,7 +336,7 @@
     {
       "id": 14,
       "label": "Autre",
-      "other": true
+      "isOther": true
     }
   ],
   "others": [
@@ -383,7 +383,7 @@
     {
       "id": 11,
       "label": "Autre",
-      "other": true
+      "isOther": true
     }
   ],
   "measures": [
@@ -426,7 +426,7 @@
     {
       "id": 10,
       "label": "Autre",
-      "other": true
+      "isOther": true
     }
   ]
 }

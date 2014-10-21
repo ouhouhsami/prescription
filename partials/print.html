@@ -1,14 +1,67 @@
 <div>
   <h2>
-    {{ ctrl.prescription.firstname }} {{ ctrl.prescription.lastname }} - {{ ctrl.prescription.age }}
+    Patient : {{ ctrl.prescription.firstname }} {{ ctrl.prescription.lastname }}
 </h2>
-    {{ ctrl.prescription.todo }}
+<ul>
+    <li>Date de l'ordonnance : {{ ctrl.prescription.date }}</li>
+    <li>Date de naissance : {{ ctrl.prescription.birthdate }}</li>
+    <li>Date d'intervention : {{ ctrl.prescription.interventionDate }}</li>
+    <li>Poids de naissance : {{ ctrl.prescription.birthWeight }}</li>
+    <li>Poids actuel : {{ ctrl.prescription.currentWeight }}</li>
+</ul>
 
-    <ul>
-        <li>Préscripteur sénior : {{ ctrl.prescriptorSenior.label }}</li>
-        <retrieve-object-from-key-value key="id" value="{{ ctrl.prescription.prescriptorSenior }}" array="{{ ctrl.prescriptorSeniors }}">
-            {{ name }}
-        </retrieve-object-from-key-value>
-        </ul>
+<ul>
+    <li>
+        Préscripteur senior :
+        <retrieve-object key="id" value="{{ ctrl.prescription.prescriptorSenior }}" array="{{ ctrl.lists.prescriptorSeniors }}">
+        {{ object.label }}
+    </retrieve-object>
+</li>
+<li>
+    Préscripteur interne :
+    <retrieve-object key="id" value="{{ ctrl.prescription.prescriptorIntern }}" array="{{ ctrl.lists.prescriptorInterns }}">
+    {{ object.label }}
+</retrieve-object>
+</li>
+</ul>
+
+Supervisions
+<div ng-init="list = ctrl.prescription.supervisions;" ng-include="'partials/print-detail.html'"></div>
+Alimentations
+<div ng-init="list = ctrl.prescription.alimentations;" ng-include="'partials/print-detail.html'"></div>
+Drains
+<div ng-init="list = ctrl.prescription.drains;" ng-include="'partials/print-detail.html'"></div>
+Perfusions
+<div ng-init="list = ctrl.prescription.perfusions;" ng-include="'partials/print-detail.html'"></div>
+Compensations
+<div ng-init="list = ctrl.prescription.compensations;" ng-include="'partials/print-detail.html'"></div>
+Analgesies 4 IR
+<div ng-init="list = ctrl.prescription.analgesies4IR;" ng-include="'partials/print-detail.html'"></div>
+Analgesies
+<div ng-init="list = ctrl.prescription.analgesies;" ng-include="'partials/print-detail.html'"></div>
+Antibiotics
+<div ng-init="list = ctrl.prescription.antibiotics;" ng-include="'partials/print-detail.html'"></div>
+Autres
+<div ng-init="list = ctrl.prescription.others;" ng-include="'partials/print-detail.html'"></div>
+Mesures
+<div ng-init="list = ctrl.prescription.measures;" ng-include="'partials/print-detail.html'"></div>
+
+<pre>
+
+
+  supervisions: {{ ctrl.prescription.supervisions }}
+  alimentations: {{ ctrl.prescription.alimentations }}
+  drains: {{ ctrl.prescription.drains }}
+  perfusions: {{ ctrl.prescription.perfusions }}
+  compensations: {{ ctrl.prescription.compensations }}
+  analgesies4IR: {{ ctrl.prescription.analgesies4IR }}
+  analgesies: {{ ctrl.prescription.analgesies }}
+  antibiotics: {{ ctrl.prescription.antibiotics }}
+  others: {{ ctrl.prescription.others }}
+  measures: {{ ctrl.prescription.measures }}
+
+</pre>
+
+{{ ctrl.prescription.todo }}
 
 </div>

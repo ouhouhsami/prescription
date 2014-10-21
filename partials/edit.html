@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-xs-6">
+  <div class="col-md-7">
     <form role="form">
       <div>
         <button class="btn btn-default" ng-click="ctrl.create()">Nouvelle prescription</button>
@@ -11,8 +11,8 @@
 
           <div class="form-group">
             <label for="date">Date</label>
-            <input class="form-control" ng-model="ctrl.date" placeholder="Date" type="date"/>
-            </div>
+            <input class="form-control" ng-model="ctrl.prescription.date" placeholder="Date" type="date"/>
+          </div>
 
           <div class="form-group">
             <label for="lastname">Nom</label>
@@ -132,7 +132,7 @@
       </div>
     </form>
   </div>
-  <div class="col-xs-6">
+  <div class="col-md-5">
 
     <div class="panel-group" id="accordion">
       <div class="panel panel-default">
